@@ -1,17 +1,29 @@
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FCN Heimspiele</title>
+
+  <title>Fußball Kalender</title>
 
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 440px;
-      margin: 60px auto;
+      max-width: 900px;
+      margin: 50px auto;
       padding: 20px;
       text-align: center;
+    }
+
+    .calendar-container {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .calendar-section {
+      flex: 1;
     }
 
     .button {
@@ -34,93 +46,145 @@
     }
 
     .secondary {
-      background: #eee;
-      color: #222;
+      background: #eeeeee;
+      color: #222222;
     }
 
     .secondary:hover {
-      background: #ddd;
+      background: #dddddd;
     }
 
     .hint {
-      color: #666;
+      color: #666666;
       font-size: 13px;
       line-height: 1.5;
     }
 
-    #message {
+    .message {
       color: green;
       font-size: 14px;
+      min-height: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .calendar-container {
+        flex-direction: column;
+      }
+
+      .calendar-section {
+        width: 100%;
+      }
     }
   </style>
 </head>
 
 <body>
-  <h1>FCN Heimspiele</h1>
+
+  <h1>Fußball Kalender</h1>
 
   <p>
-    Abonniere die Heimspiele des FC Viktoria Neupotz.
-    Der Kalender wird automatisch aktualisiert.
+    Abonniere die Spielpläne.
+    Die Kalender werden automatisch aktualisiert.
   </p>
 
-  <!-- Apple Calendar -->
-  <a
-    class="button"
-    href="webcal://tim-f-dev.github.io/football-ics/calendar.ics"
-  >
-    Apple Calendar
-  </a>
+  <div class="calendar-container">
 
-  <!-- Google Calendar -->
-  <a
-    class="button"
-    href="https://calendar.google.com/calendar/r?cid=https%3A%2F%2Ftim-f-dev.github.io%2Ffootball-ics%2Fcalendar.ics"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Google Calendar
-  </a>
+    <!-- FCN -->
+    <section class="calendar-section">
 
-  <!-- Manual subscription -->
-  <button
-    class="button secondary"
-    onclick="copyLink()"
-  >
-    ICS-Link kopieren
-  </button>
+      <h2>FCN Heimspiele</h2>
 
-  <p id="message" aria-live="polite"></p>
+      <a
+        class="button"
+        href="webcal://tim-f-dev.github.io/football-ics/FCN-Heim.ics"
+      >
+        Apple Calendar
+      </a>
+
+      <a
+        class="button"
+        href="https://calendar.google.com/calendar/r?cid=https%3A%2F%2Ftim-f-dev.github.io%2Ffootball-ics%2FFCN-Heim.ics"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Google Calendar
+      </a>
+
+      <button
+        class="button secondary"
+        onclick="copyLink('https://tim-f-dev.github.io/football-ics/FCN-Heim.ics', 'fcn-message')"
+      >
+        ICS-Link kopieren
+      </button>
+
+      <p id="fcn-message" class="message"></p>
+
+    </section>
+
+
+    <!-- FCK -->
+    <section class="calendar-section">
+
+      <h2>FCK Spiele</h2>
+
+      <a
+        class="button"
+        href="webcal://tim-f-dev.github.io/football-ics/FCK.ics"
+      >
+        Apple Calendar
+      </a>
+
+      <a
+        class="button"
+        href="https://calendar.google.com/calendar/r?cid=https%3A%2F%2Ftim-f-dev.github.io%2Ffootball-ics%2FFCK.ics"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Google Calendar
+      </a>
+
+      <button
+        class="button secondary"
+        onclick="copyLink('https://tim-f-dev.github.io/football-ics/FCK.ics', 'fck-message')"
+      >
+        ICS-Link kopieren
+      </button>
+
+      <p id="fck-message" class="message"></p>
+
+    </section>
+
+  </div>
 
   <p class="hint">
     Falls Google Calendar den Kalender nicht automatisch hinzufügt,
-    kopiere den ICS-Link und füge ihn am Computer
-    unter „Weitere Kalender → Per URL“ ein.
+    kopiere den ICS-Link und füge ihn am Computer unter
+    „Weitere Kalender → Per URL“ ein.
   </p>
 
-  <a
-    href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Google Calendar: Kalender per URL hinzufügen
-  </a>
+  <p>
+    <a
+      href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Google Calendar: Kalender per URL hinzufügen
+    </a>
+  </p>
 
   <script>
-    const ICS_URL =
-      "https://tim-f-dev.github.io/football-ics/calendar.ics";
-
-    // Copy the subscription URL to the clipboard
-    async function copyLink() {
-      const message = document.getElementById("message");
+    async function copyLink(url, messageId) {
+      const message = document.getElementById(messageId);
 
       try {
-        await navigator.clipboard.writeText(ICS_URL);
+        await navigator.clipboard.writeText(url);
         message.textContent = "ICS-Link kopiert!";
       } catch {
-        message.textContent =
-          "Kopieren fehlgeschlagen. Link: " + ICS_URL;
+        message.textContent = "Kopieren fehlgeschlagen: " + url;
       }
     }
   </script>
+
 </body>
 </html>
+```
