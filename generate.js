@@ -1,0 +1,19 @@
+import fs from "node:fs";
+
+const ics = `
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//My Calendar//EN
+CALSCALE:GREGORIAN
+
+BEGIN:VEVENT
+UID:test-1@example.com
+DTSTART:20261010T180000Z
+DTEND:20261010T200000Z
+SUMMARY:Test event
+END:VEVENT
+
+END:VCALENDAR
+`.trim();
+
+fs.writeFileSync("calendar.ics", ics);
