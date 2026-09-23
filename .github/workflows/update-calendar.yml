@@ -7,20 +7,33 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   update:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # Check out the repository
+      - name: Checkout
+        uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      # Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 24
 
-      - run: node generate.js
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
 
+      # Generate the calendar.ics file
+      - name: Generate calendar
+        run: node generate.js
+
+      # Commit calendar changes back to the repository
       - name: Commit calendar
         run: |
           git config user.name "github-actions[bot]"
@@ -28,3 +41,28 @@ jobs:
           git add calendar.ics
           git diff --cached --quiet || git commit -m "Update calendar"
           git push
+
+      # Prepare GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Upload the repository as the Pages site
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      # Publish the uploaded artifact to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
