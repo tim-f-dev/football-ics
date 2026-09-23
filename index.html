@@ -53,12 +53,6 @@
       background: #dddddd;
     }
 
-    .hint {
-      color: #666666;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
     .message {
       color: green;
       font-size: 14px;
@@ -83,7 +77,7 @@
 
   <p>
     Abonniere die Spielpläne.
-    Die Kalender werden automatisch aktualisiert.
+    Die Kalender werden automatisch aktualisiert mit den Daten von fussball.de.
   </p>
 
   <div class="calendar-container">
@@ -102,7 +96,7 @@
 
       <a
         class="button"
-        href="https://calendar.google.com/calendar/r?cid=https%3A%2F%2Ftim-f-dev.github.io%2Ffootball-ics%2FFCN-Heim.ics"
+        href="https://calendar.google.com/calendar/embed?src=6ddh1okj22mtgd09gj55hh951j9hcag6%40import.calendar.google.com&ctz=Europe%2FBerlin"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -120,7 +114,6 @@
 
     </section>
 
-
     <!-- FCK -->
     <section class="calendar-section">
 
@@ -135,7 +128,7 @@
 
       <a
         class="button"
-        href="https://calendar.google.com/calendar/r?cid=https%3A%2F%2Ftim-f-dev.github.io%2Ffootball-ics%2FFCK.ics"
+        href="https://calendar.google.com/calendar/embed?src=ovddtq3r0p74r9q44l2alfqvh7cr7093%40import.calendar.google.com&ctz=Europe%2FBerlin"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -154,22 +147,6 @@
     </section>
 
   </div>
-
-  <p class="hint">
-    Falls Google Calendar den Kalender nicht automatisch hinzufügt,
-    kopiere den ICS-Link und füge ihn am Computer unter
-    „Weitere Kalender → Per URL“ ein.
-  </p>
-
-  <p>
-    <a
-      href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Google Calendar: Kalender per URL hinzufügen
-    </a>
-  </p>
 
   <script>
     async function copyLink(url, messageId) {
