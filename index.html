@@ -3,12 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>FCN Heimspiele</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 440px;
+      margin: 60px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .button {
+      display: block;
+      padding: 14px;
+      margin: 12px 0;
+      border-radius: 8px;
+      background: #2365b0;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .button:hover {
+      background: #174b86;
+    }
+
+    .secondary {
+      background: #eee;
+      color: #222;
+    }
+
+    .secondary:hover {
+      background: #ddd;
+    }
+
+    .hint {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    #message {
+      color: green;
+      font-size: 14px;
+    }
+  </style>
 </head>
 
 <body>
-
   <h1>FCN Heimspiele</h1>
 
   <p>
@@ -16,7 +63,17 @@
     Der Kalender wird automatisch aktualisiert.
   </p>
 
+  <!-- Apple Calendar -->
   <a
+    class="button"
+    href="webcal://tim-f-dev.github.io/football-ics/calendar.ics"
+  >
+    Apple Calendar
+  </a>
+
+  <!-- Google Calendar -->
+  <a
+    class="button"
     href="https://calendar.google.com/calendar/r?cid=https%3A%2F%2Ftim-f-dev.github.io%2Ffootball-ics%2Fcalendar.ics"
     target="_blank"
     rel="noopener noreferrer"
@@ -24,21 +81,46 @@
     Google Calendar
   </a>
 
-  <br><br>
+  <!-- Manual subscription -->
+  <button
+    class="button secondary"
+    onclick="copyLink()"
+  >
+    ICS-Link kopieren
+  </button>
 
-  <a href="webcal://tim-f-dev.github.io/football-ics/calendar.ics">
-    Apple Calendar / Outlook
-  </a>
+  <p id="message" aria-live="polite"></p>
 
-  <br><br>
+  <p class="hint">
+    Falls Google Calendar den Kalender nicht automatisch hinzufügt,
+    kopiere den ICS-Link und füge ihn am Computer
+    unter „Weitere Kalender → Per URL“ ein.
+  </p>
 
   <a
-    href="https://tim-f-dev.github.io/football-ics/calendar.ics"
+    href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl"
     target="_blank"
     rel="noopener noreferrer"
   >
-    ICS-Datei direkt öffnen
+    Google Calendar: Kalender per URL hinzufügen
   </a>
 
+  <script>
+    const ICS_URL =
+      "https://tim-f-dev.github.io/football-ics/calendar.ics";
+
+    // Copy the subscription URL to the clipboard
+    async function copyLink() {
+      const message = document.getElementById("message");
+
+      try {
+        await navigator.clipboard.writeText(ICS_URL);
+        message.textContent = "ICS-Link kopiert!";
+      } catch {
+        message.textContent =
+          "Kopieren fehlgeschlagen. Link: " + ICS_URL;
+      }
+    }
+  </script>
 </body>
 </html>
