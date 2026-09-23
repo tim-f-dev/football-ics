@@ -175,6 +175,8 @@ const calendar = [
   "PRODID:-//FC Viktoria Neupotz//Spielplan//DE",
   "CALSCALE:GREGORIAN",
   "METHOD:PUBLISH",
+  "X-WR-CALNAME:FCN Heimspiele",
+  "X-WR-CALDESC:Heimspiele des FC Viktoria Neupotz",
   ...events,
   "END:VCALENDAR",
   ""
